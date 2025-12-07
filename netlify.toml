@@ -1,0 +1,19 @@
+[build]
+  # Executes the 'vite build' script from package.json
+  command = "npm run build"
+  
+  # Tells Netlify to serve files from the output folder
+  publish = "dist"
+
+[functions]
+  # Explicitly sets the directory for serverless functions to the default location.
+  # This resolves the configuration error seen in your Netlify settings.
+  directory = "netlify/functions" 
+
+# SPA Routing Fix
+[[redirects]]
+  # This is the crucial rewrite rule for your HashRouter (and a potential future BrowserRouter).
+  # It ensures Netlify serves /index.html for any request that doesn't match a static file.
+  from = "/*"
+  to = "/index.html"
+  status = 200
